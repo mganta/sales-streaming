@@ -1,0 +1,40 @@
+flume
+    bin/flume-ng agent --name tier1 --conf-file flume.conf --conf conf
+
+zookeeper
+    bin/zookeeper-server-start.sh  config/zookeeper.properties
+
+kafka
+    bin/kafka-server-start.sh config/server.properties
+
+
+    bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic pinot-input
+    bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic raw-input
+    bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic raw-input --replication-factor 1 --partitions 1
+    bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic pinot-input --replication-factor 1 --partitions 1
+
+    bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic pinot-input --from-beginning
+
+
+pinot
+    bin/pinot-admin.sh StartController  -controllerPort 9000  -zkAddress "localhost:2181"  -dataDir "/tmp/PinotController"
+
+    bin/pinot-admin.sh StartBroker -brokerPort 8099 -zkAddress "localhost:2181"
+
+    bin/pinot-admin.sh StartServer -serverPort 8098 -dataDir /tmp/data -segmentDir /tmp/segment -zkAddress "localhost:2181"
+
+
+    /pinot-distribution/target/pinot-0.016-pkg/bin/pinot-admin.sh AddSchema -schemaFile invoice_schema.json -exec
+    /pinot-distribution/target/pinot-0.016-pkg/bin/pinot-admin.sh AddTable -filePath invoice_realtime_definition.json -exec
+
+
+urls:
+    http://localhost:9000/swagger-ui/index.html?url=/api#/instance
+    http://localhost:9000/query/#
+    http://localhost:9000/tables
+    http://localhost:9000/tenants
+
+api:
+curl -X DELETE --header 'Accept: application/json' 'http://localhost:9000/tables/invoices'
+
+

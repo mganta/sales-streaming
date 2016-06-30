@@ -1,0 +1,1 @@
+bin/flume-ng agent --name tier1 --conf-file flume.conf --conf conf

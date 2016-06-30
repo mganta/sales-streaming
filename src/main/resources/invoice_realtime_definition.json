@@ -1,0 +1,34 @@
+{
+  "tableName":"invoices",
+  "segmentsConfig" : {
+    "retentionTimeUnit":"DAYS",
+    "retentionTimeValue":"70000",
+    "segmentPushFrequency":"daily",
+    "segmentPushType":"APPEND",
+    "replication" : "1",
+    "schemaName" : "invoices",
+    "timeColumnName" : "daysSinceEpoch",
+    "timeType" : "DAYS",
+    "segmentAssignmentStrategy" : "BalanceNumSegmentAssignmentStrategy"
+  },
+  "tableIndexConfig" : {
+    "invertedIndexColumns" : ["companyID", "StoreLocationID", "StoreLocationName", "MethodOfPaymentID", "ItemID", "DepartmentID", "VendorID", "VendorName" ],
+    "loadMode"  : "HEAP",
+    "lazyLoad"  : "false",
+    "streamConfigs": {
+      "streamType": "kafka",
+      "stream.kafka.consumer.type": "highLevel",
+      "stream.kafka.topic.name": "pinot-input",
+      "stream.kafka.decoder.class.name": "com.linkedin.pinot.core.realtime.impl.kafka.KafkaJSONMessageDecoder",
+      "stream.kafka.zk.broker.url": "localhost:2181",
+      "stream.kafka.hlc.zk.connect.string": "localhost:2181"
+    }
+  },
+  "tableType":"REALTIME",
+  "tenants" : {
+    "broker":"DefaultTenant",
+    "server":"DefaultTenant"
+  },
+  "metadata": {
+  }
+}

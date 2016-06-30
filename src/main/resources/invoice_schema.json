@@ -1,0 +1,278 @@
+{
+  "metricFieldSpecs" : [
+    {
+      "dataType" : "FLOAT",
+      "delimiter" : null,
+      "defaultNullValue" : 0,
+      "name" : "InvoiceAmount"
+    },
+    {
+      "dataType" : "FLOAT",
+      "delimiter" : null,
+      "defaultNullValue" : 0,
+      "name" : "PhysicalAmount"
+    },
+    {
+      "dataType" : "FLOAT",
+      "delimiter" : null,
+      "defaultNullValue" : 0,
+      "name" : "InvoiceAmountPaid"
+    },
+    {
+      "dataType" : "FLOAT",
+      "delimiter" : null,
+      "defaultNullValue" : 0,
+      "name" : "AmountPaid"
+    },
+    {
+      "dataType" : "FLOAT",
+      "delimiter" : null,
+      "defaultNullValue" : 0,
+      "name" : "UnitsInCase"
+    },
+    {
+      "dataType" : "FLOAT",
+      "delimiter" : null,
+      "defaultNullValue" : 0,
+      "name" : "InvoiceValuePrice"
+    },
+    {
+      "dataType" : "FLOAT",
+      "delimiter" : null,
+      "defaultNullValue" : 0,
+      "name" : "BuyingCaseQuantity"
+    },
+    {
+      "dataType" : "FLOAT",
+      "delimiter" : null,
+      "defaultNullValue" : 0,
+      "name" : "CasePrice"
+    },
+    {
+      "dataType" : "FLOAT",
+      "delimiter" : null,
+      "defaultNullValue" : 0,
+      "name" : "SuggestedSellingPrice"
+    },
+    {
+      "dataType" : "FLOAT",
+      "delimiter" : null,
+      "defaultNullValue" : 0,
+      "name" : "RegularSellingPrice"
+    },
+    {
+      "dataType" : "FLOAT",
+      "delimiter" : null,
+      "defaultNullValue" : 0,
+      "name" : "BuyingUnitQuantity"
+    },
+    {
+      "dataType" : "FLOAT",
+      "delimiter" : null,
+      "defaultNullValue" : 0,
+      "name" : "TotalInvoiceItemValue"
+    },
+    {
+      "dataType" : "FLOAT",
+      "delimiter" : null,
+      "defaultNullValue" : 0,
+      "name" : "TotalInvoiceItemQuantity"
+    }
+  ],
+  "dimensionFieldSpecs" : [
+    {
+      "dataType" : "INT",
+      "delimiter" : null,
+      "defaultNullValue" : -1,
+      "name" : "companyID"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "0",
+      "name" : "PreviousSellingPrice"
+    },
+    {
+      "dataType" : "INT",
+      "delimiter" : null,
+      "defaultNullValue" : "0",
+      "name" : "StoreLocationID"
+    },
+    {
+      "dataType" : "STRING",
+      "defaultNullValue" : "UNKNOWN",
+      "delimiter" : null,
+      "name" : "StoreLocationName"
+    },
+    {
+      "dataType" : "STRING",
+      "defaultNullValue" : "UNKNOWN",
+      "delimiter" : null,
+      "name" : "InvoiceNo"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "VendorId"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "VendorName"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "InvoiceDate"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "InvoiceStatus"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "InvoiceFileName"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "UpdateInventoryInItem"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "IsEDIInvoice"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "IsCustomInvoiceAmount"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "IsCloned"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "CreatedDateTime"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "LastModifiedBy"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "LastModifiedDatetime"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "InvoicePaymentID"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "CheckNumber"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "PayeeName"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "PaymentSourceID"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "PaymentSourceName"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "MethodOfPaymentID"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "MethodOfPaymentDescription"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "InvoiceDetailID"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "POSCode"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "Description"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "ItemID"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "DepartmentID"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "DepartmentDescription"
+    },
+    {
+      "dataType" : "STRING",
+      "delimiter" : null,
+      "defaultNullValue" : "UNKNOWN",
+      "name" : "POSDepartmentDescription"
+    }
+  ],
+  "timeFieldSpec" : {
+    "incomingGranularitySpec" : {
+      "timeType" : "DAYS",
+      "dataType" : "LONG",
+      "name" : "DaysSinceEpoch"
+    }
+  },
+  "schemaName" : "invoices"
+}

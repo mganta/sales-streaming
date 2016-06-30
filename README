@@ -1,0 +1,15 @@
+A very basic streaming app that does:
+
+1. Read json files using flume into kafka
+2. Do light weight transformation from one kafka topic to another using flink
+3. Pull data from flink into Linkedin's Pinot
+4. View the data in Pinot's web UI 
+
+Resources:
+
+http://kafka.apache.org
+http://flume.apache.org
+http://flink.apache.org
+https://github.com/linkedin/pinot
+
+Steps in the file sales-streaming/src/main/resources/run_steps

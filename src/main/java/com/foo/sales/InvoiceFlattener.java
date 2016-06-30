@@ -54,10 +54,9 @@ public class InvoiceFlattener {
             String key = keysIterator.next();
             Object obj = jsonObject.get(key);
             if (obj instanceof JSONArray) {
-                if(key.equalsIgnoreCase("InvoiceDetail")) {
+                if (key.equalsIgnoreCase("InvoiceDetail")) {
                     detailArray = processArray(((JSONArray) obj));
-                }
-                else if (key.equalsIgnoreCase("InvoicePayment")) {
+                } else if (key.equalsIgnoreCase("InvoicePayment")) {
                     paymentArray = processArray(((JSONArray) obj));
                 }
             } else {
@@ -69,11 +68,11 @@ public class InvoiceFlattener {
 
         List<JSONObject> flattenedArray = new ArrayList<>();
 
-        for(int i =0; i < detailArray.size(); i++) {
+        for (int i = 0; i < detailArray.size(); i++) {
             JSONObject outputObj = new JSONObject();
             JSONObject arrayObj = detailArray.get(i);
             mergeJSONObjects(outputObj, jObj);
-            if(paymentArray.size() > 0)
+            if (paymentArray.size() > 0)
                 mergeJSONObjects(outputObj, paymentArray.get(0));
             mergeJSONObjects(outputObj, arrayObj);
             flattenedArray.add(outputObj);
@@ -84,20 +83,20 @@ public class InvoiceFlattener {
 
     public static List<JSONObject> processArray(JSONArray obj) throws JSONException {
         List<JSONObject> detailArray = new ArrayList<>();
-        for(int index = 0; index < obj.length(); index++)
+        for (int index = 0; index < obj.length(); index++)
             detailArray.add(obj.getJSONObject(index));
         return detailArray;
     }
 
 
     public static void mergeJSONObjects(JSONObject json, JSONObject newObj) throws JSONException {
-            Iterator<String> keys = newObj.keys();
-            while(keys.hasNext()) {
-                String key = keys.next();
-                String stringValue = newObj.get(key).toString();
-                if(!stringValue.equalsIgnoreCase("null"))
-                    json.put(key, newObj.get(key));
-            }
+        Iterator<String> keys = newObj.keys();
+        while (keys.hasNext()) {
+            String key = keys.next();
+            String stringValue = newObj.get(key).toString();
+            if (!stringValue.equalsIgnoreCase("null"))
+                json.put(key, newObj.get(key));
+        }
     }
 
     public static long daysSinceEpoch(String invoiceDate) {

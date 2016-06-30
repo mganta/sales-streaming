@@ -21,9 +21,9 @@ import java.util.*;
 
 public class SalesStreaming {
 
-	
-	public static void main(String[] args) throws Exception {
-       // ParameterTool parameterTool = ParameterTool.fromArgs(args);
+
+    public static void main(String[] args) throws Exception {
+        // ParameterTool parameterTool = ParameterTool.fromArgs(args);
 
         Configuration conf = new Configuration();
 
@@ -32,56 +32,58 @@ public class SalesStreaming {
 
         final StreamExecutionEnvironment env = new LocalStreamEnvironment(conf);
 
-		final Properties kafkaConsumerProps = new Properties();
-	    kafkaConsumerProps.setProperty("zookeeper.connect", "localhost:2181");
-	    kafkaConsumerProps.setProperty("group.id", "pinot-ingest");
-	    kafkaConsumerProps.setProperty("auto.commit.enable", "false");
-	    kafkaConsumerProps.setProperty("bootstrap.servers", "localhost:9092");
-	    
-	    FlinkKafkaConsumer09 kafkaSrc = new FlinkKafkaConsumer09(
-	         "raw-input", new SimpleStringSchema(),
-	         kafkaConsumerProps);
+        final Properties kafkaConsumerProps = new Properties();
+        kafkaConsumerProps.setProperty("zookeeper.connect", "localhost:2181");
+        kafkaConsumerProps.setProperty("group.id", "pinot-ingest");
+        kafkaConsumerProps.setProperty("auto.commit.enable", "false");
+        kafkaConsumerProps.setProperty("bootstrap.servers", "localhost:9092");
 
-		DataStream kafkaInput = env.addSource(kafkaSrc);
+        FlinkKafkaConsumer09 kafkaSrc = new FlinkKafkaConsumer09(
+                "raw-input", new SimpleStringSchema(),
+                kafkaConsumerProps);
 
-		DataStream jsonStream = kafkaInput.rebalance().map(new MapFunction<String, JSONObject>() {
-	            public JSONObject map(String value) throws Exception {
-                    JSONObject jObj = new JSONObject(value);
-                    return jObj;
-	            }});
+        DataStream kafkaInput = env.addSource(kafkaSrc);
 
-	    DataStream strippedDownStream = jsonStream.flatMap(
-	       new FlatMapFunction<JSONObject, JSONObject>() {
-	            public void flatMap(JSONObject value, Collector<JSONObject> out) throws Exception {
-                    List<JSONObject> flattenedJsons = InvoiceFlattener.parseJSON(value);
-                   for(JSONObject json : flattenedJsons)
-                       out.collect(json);
-	            }});
+        DataStream jsonStream = kafkaInput.rebalance().map(new MapFunction<String, JSONObject>() {
+            public JSONObject map(String value) throws Exception {
+                JSONObject jObj = new JSONObject(value);
+                return jObj;
+            }
+        });
 
-	  /**  DataStream byteArrayStream = strippedDownStream.map(
-	        new MapFunction<JSONObject, byte[]>() {
-	            public byte[] map(JSONObject value) throws Exception {
-					System.out.println(value.toString());
-					//System.out.println(value.toString().getBytes("UTF-8"));
-	                return value.toString().getBytes(
-	                   Charset.forName("UTF-8"));
-	            }}); **/
+        DataStream strippedDownStream = jsonStream.flatMap(
+                new FlatMapFunction<JSONObject, JSONObject>() {
+                    public void flatMap(JSONObject value, Collector<JSONObject> out) throws Exception {
+                        List<JSONObject> flattenedJsons = InvoiceFlattener.parseJSON(value);
+                        for (JSONObject json : flattenedJsons)
+                            out.collect(json);
+                    }
+                });
+
+        /**  DataStream byteArrayStream = strippedDownStream.map(
+         new MapFunction<JSONObject, byte[]>() {
+         public byte[] map(JSONObject value) throws Exception {
+         System.out.println(value.toString());
+         //System.out.println(value.toString().getBytes("UTF-8"));
+         return value.toString().getBytes(
+         Charset.forName("UTF-8"));
+         }}); **/
 
         //   TypeInformationSerializationSchema<byte[]> typeInfo = new TypeInformationSerializationSchema<byte[]>(PrimitiveArrayTypeInfo.BYTE_PRIMITIVE_ARRAY_TYPE_INFO, env.getConfig());
         //  byteArrayStream.addSink(new FlinkKafkaProducer09<byte[]>("localhost:9092", "pinot-input", typeInfo));
 
-		DataStream jsonArrayStream = strippedDownStream.map(
-				new MapFunction<JSONObject, String>() {
-					public String map(JSONObject value) throws Exception {
-						System.out.println(value.toString());
-						return value.toString();
-					}});
+        DataStream jsonArrayStream = strippedDownStream.map(
+                new MapFunction<JSONObject, String>() {
+                    public String map(JSONObject value) throws Exception {
+                        System.out.println(value.toString());
+                        return value.toString();
+                    }
+                });
 
 
-
-		jsonArrayStream.addSink(new FlinkKafkaProducer09<String>("localhost:9092", "pinot-input", new SimpleStringSchema()));
+        jsonArrayStream.addSink(new FlinkKafkaProducer09<String>("localhost:9092", "pinot-input", new SimpleStringSchema()));
         env.execute("pinot-ingestion");
 
-	}
+    }
 
 }
